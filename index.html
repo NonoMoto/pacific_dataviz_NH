@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Résilience îles du Pacifique</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <svg width="0" height="0">
+    <defs>
+      <pattern id="island-texture" patternUnits="userSpaceOnUse" width="16" height="16">
+        <image xlink:href="sand-svg.svg" width="16" height="16" />
+      </pattern>
+    </defs>
+  </svg>
+</head>
+<body>
+
+  <div id="loading">
+    <span style="margin-bottom: 1%; font-size: 1.5em;">Chargement du contenu ...</span>
+    <span class="loader"></span>
+  </div>
+  <div id="graphs">
+
+    <div id="popup-synthese" class="popup">
+      <div class="popup-content">
+        <button class="close-btn" onclick="document.getElementById('popup-synthese').classList.remove('show')">&times;</button>
+        <h2>Synthèse complète - Résilience des îles du Pacifique</h2>
+        <div class="popup-body">
+          <p id="texte-synthese">texte synthèse</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-island-wrapper">
+      <div class="info-island">
+        <img id="drapeau_ile" src="" alt="Drapeau" />
+        <h2 id="nom_ile"></h2>
+        <p id="surface_ile"></p>
+        <p id="population_ile"></p>
+        <p id="densite_ile"></p><br>
+        <p style="font-style: italic; color: #AAA;">* Données estimées sur 2022 (<a target="_blank" href="https://stats.pacificdata.org/vis?lc=fr&df[ds]=SPC2&df[id]=DF_POP_DENSITY&df[ag]=SPC&df[vs]=1.0&dq=A..&pd=2022%2C2022&to[TIME_PERIOD]=false">lien</a>)</p>
+        <button class="back-button" onclick="goBack(this)">←</button>
+      </div>
+    </div>
+
+    <div id="radarContainer" class="">
+      <h2 style="margin-bottom: -20px; color: #004d40;">I. Score global de la résilience humaine</h2>
+      <svg id="radarChart" width="650" height="650"></svg>
+      <div class="radar-tooltip" id="radar-tooltip"></div>
+    </div>
+
+    <div id="lineChartContainer" class="">
+      <h2 style="margin-bottom: 30px; color: #004d40;">II. Corrélations entre santé, environnement et accès aux services.</h2>
+      <div id="controls">
+        <div class="ind1-infos">
+          <div class="" style="width: 16px; height: 16px; background-color: #1f77b4; border-radius: 50%; flex-shrink: 0;"></div>
+          <p class="ind1-info-title" style="font-size: 15px;"></p>
+        </div>
+
+        <div class="ind2-infos">
+          <div class="" style="width: 16px; height: 16px; background-color: orange; border-radius: 50%; flex-shrink: 0;"></div>
+          <select id="ind2" style="font-size: 15px;"></select>
+        </div>
+      </div>
+      <svg id="lineChart" width="800" height="450"></svg>
+      <div id="lineChart-tooltip" style="position: absolute; background: white; padding: 12px 16px; pointer-events: none; opacity: 0;font-size: 13px; color: #333;"></div>
+    </div>
+
+  </div>
+
+  <header id="header-title" class="header-title">
+    <h1>🌊 Résilience des îles du Pacifique</h1>
+    <p class="subtitle">Face aux défis humains et environnementaux</p><br>
+    <p class="description">Cette visualisation met en lumière plusieurs indicateurs permettant d’évaluer la <strong>résilience des îles du Pacifique</strong>, à partir des données du projet <strong><a target="_blank" href="https://blue-pacific-2050.pacificdata.org/">Blue Pacific 2050</a></strong>. Pour offrir une représentation <strong>équitable</strong> et <strong>inclusive</strong>, seuls quelques indicateurs disponibles pour l’ensemble des îles ont été retenus. Cela permet une <strong>comparaison cohérente, sans exclure aucun territoire.</strong></p><br><br><br>
+    <div class="others">
+      <img src="favicon.ico" width="100"><br><br><br>
+      <small class="credits">Produit par <strong>Noé HALLER</strong> en juillet 2025.</small>
+    </div>
+  </header>
+
+  <div id="map"></div>
+  <div id="full-white-mask"></div>
+  <div id="info-overlay"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="JS/leaflet.magnifyingglass.js"></script>
+
+  <script src="https://unpkg.com/leaflet-geometryutil@0.9.3/src/leaflet.geometryutil.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="JS/scripts.js"></script>
+  <script src="JS/radar.js"></script>
+  <script src="JS/line.js"></script>
+  <script src="JS/analyse.js"></script>
+
+
+</body>
+</html>
